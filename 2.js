@@ -10,6 +10,23 @@ const board = [
   [".", ".", ".", ".", "8", ".", ".", "7", "9"],
 ];
 
+function validSudoku(board) {
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      const value = board[i][j];
+      if (value !== ".") {
+        if (
+          !validRow(board, i, j, value) ||
+          !validColumn(board, i, j, value) | !validBox(board, i, j, value)
+        ) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
+
 function validRow(board, row, col, value) {
   for (let j = 0; j < 8; j++) {
     if (j !== col) {
@@ -47,3 +64,5 @@ function validBox(board, row, col, value) {
   }
   return true;
 }
+
+console.log(validSudoku(board));
